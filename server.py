@@ -26,9 +26,8 @@ html = """<!DOCTYPE html>
 </html>
 """
 
-#TODO: Redirect the submit to a page that predicts with the model (i.e. the /actionpage)
-#TODO: Fix the render_template() to work with site.html
-#TODO: All the rest of the hard model stuff
+# TODO: Fix the render_template() to work with site.html
+# TODO: All the rest of the hard model stuff
 
 
 
@@ -55,7 +54,7 @@ def upload_file():
 @app.route("/")
 def homepage():
     """Hosting the boring HTML"""
-    # return render_template('site.html')
-    return html
+    return render_template('site.html')
+    # return html
 
 app.run(host='0.0.0.0', port=5000)
