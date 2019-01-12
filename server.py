@@ -26,7 +26,7 @@ html = """<!DOCTYPE html>
 </html>
 """
 
-# TODO: Fix the render_template() to work with site.html
+# TODO: Redirect the submit to a page that predicts with the model (i.e. the /actionpage)
 # TODO: All the rest of the hard model stuff
 
 
@@ -56,5 +56,10 @@ def homepage():
     """Hosting the boring HTML"""
     return render_template('site.html')
     # return html
+
+
+@app.route("/result")
+def result():
+    return render_template('result.html')
 
 app.run(host='0.0.0.0', port=5000)
