@@ -3,7 +3,6 @@
 import os
 from flask import Flask, request, redirect, render_template
 
-# TODO: Determine how to actually receive the image and store on the server
 # TODO: All the rest of the hard model stuff
 
 UPLOAD_FOLDER = 'img/'
@@ -36,7 +35,7 @@ def homepage():
 def upload():
     """
     Writes the uploaded file out to the server's disk
-    # TODO: Call the library to predict apple or orange, will write the result to jinja template
+    # TODO: Call/create the library to predict apple or orange, will write the result to jinja template
     :return:
     """
     target = 'img/'
