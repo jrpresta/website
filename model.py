@@ -1,5 +1,3 @@
-# TODO: Train model with linux instance
-# OR
 # TODO: Checkout Pytorch
 
 
