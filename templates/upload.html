@@ -6,13 +6,12 @@
 </head>
 <body>
     <p>
-        The purpose of this website is to allow a user to upload an image and have it
-        recognized. As of right now, the model that I have distinguishes between
-        apples and oranges. I hope to learn how to deploy that model on the server at
-        the back-end, and I want the front-end HTML to be decent.
+        The purpose of this website is to give the user the ability to upload an
+        image of a bird and have it classified. The site supports classification of
+        200 different species of birds.
     </p>
     <p>
-        Insert your image below:
+        Upload your image below.
     </p>
 
 <form id="upload-form" action="{{ url_for('upload') }}" method="POST" enctype="multipart/form-data">

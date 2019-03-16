@@ -2,10 +2,9 @@
 # https://github.com/ibrahimokdadov/upload_file_python
 import os
 from flask import Flask, request, redirect, render_template
+from model import *
 
-# TODO: All the rest of the hard model stuff
-
-UPLOAD_FOLDER = 'img/'
+UPLOAD_FOLDER = 'uploaded_img/'
 # ALLOWED_EXTENSIONS = {'jpg', 'jpeg'}
 
 app = Flask(__name__)
@@ -35,15 +34,19 @@ def homepage():
 def upload():
     """
     Writes the uploaded file out to the server's disk
-    # TODO: Call/create the library to predict apple or orange, will write the result to jinja template
     :return:
     """
-    target = 'img/'
+    # TODO: Make sure to delete the image so uploaded has one image
+    target = 'uploaded_img/'
 
     # writing out the uploaded file to the server
     file = request.files.getlist("file")[0]
     save_location = f"{target}/{file.filename}"
     file.save(save_location)
+
+    # Use the current best model that I have
+    model_path = 'models/current_model.pt'
+    prediction = predict_species(model_path)
 
     return render_template("result.html")
 
