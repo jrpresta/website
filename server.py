@@ -46,9 +46,11 @@ def upload():
 
     # Use the current best model that I have
     model_path = 'models/current_model.pt'
-    prediction = predict_species(model_path)
+    prediction = predict_species(model_path, 5)
 
-    return render_template("result.html")
+    print(prediction)
+
+    return render_template("result.html", species_list=prediction)
 
 
 app.run(host='0.0.0.0', port=5000)

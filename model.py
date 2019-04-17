@@ -70,8 +70,9 @@ def predict_species(model_path, top_n):
                          reverse=True)[:top_n]
 
     # TODO: Evalutate Predictions
-    return most_likely
-
+    # return most_likely
+    # print(most_likely)
+    return [species for (species, i) in encoder.items() if i in most_likely]
 
 # commit the sin of using the encoder as a global variable
 pickle_in = open('models/encoder.pkl', 'rb')
