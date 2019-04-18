@@ -5,7 +5,9 @@ from flask import render_template
 @application.route('/index')
 @application.route('/')
 def index():
-    return '<h1> Welcome to the movie review website </h1>'
+    return render_template('scratch.html',
+                           words=[('testing', 1), ('this', 0.5), ('html', 0.1)],
+                           prob=0.69)
 
 
-application.run(host='0.0.0.0', port=80)
+application.run(host='0.0.0.0', port=8080)
