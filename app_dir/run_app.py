@@ -1,10 +1,5 @@
 from torch.utils.data import Dataset
-
-class Voc(Dataset):
-    """This dummy class really exists so that the pickle
-    vocab object on disk can be interpreted"""
-    def __init__(self, name):
-        x = None
-
-
+import sys
+sys.path.insert(0, '../model/')
+from model import Voc
 from app import application
