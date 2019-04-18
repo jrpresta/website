@@ -3,7 +3,7 @@
 <h1>Exploring Colors!</h1>
 <body>
 
-<p>The probability of this review being positive is {{ prob }}</p>
+<h3>The probability of this review being positive is {{ prob }}</h3>
 <p>
     {%- for word in words %}
         <span style="color: rgb({{ 255-255*word[1] }}, {{ 255-255*word[1] }}, 255)">{{ word[0] }}</span>
