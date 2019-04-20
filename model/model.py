@@ -4,54 +4,11 @@ import torch
 import pickle
 
 
-MAX_LENGTH = 15
-
-UNK_token = 0
-PAD_token = 1
-SOS_token = 2
-EOS_token = 3
-
-
 class Voc(Dataset):
-    def __init__(self, name):
-        self.name = name
-        self.trimmed = False
-        self.word2index = {}
-        self.word2count = {}
-        self.index2word = {PAD_token: 'PAD', SOS_token: 'SOS',
-                           EOS_token: 'EOS', UNK_token: 'UNK'}
-        self.num_words = 4  # include the ones above
+    """A trivial dataset to give the pickle file something to read into"""
+    def __init__(self):
+        self.trivial = None
 
-    def add_sentence(self, sentence):
-        for word in sentence.split():
-            self.add_word(word.lower())
-
-    def add_word(self, word):
-        if word not in self.word2index:
-            self.word2index[word] = self.num_words
-            self.word2count[word] = 1
-            self.index2word[self.num_words] = word
-            self.num_words += 1
-        else:
-            self.word2count[word] += 1
-
-    # remove words that appear less frequently
-    def trim(self, min_count):
-        if self.trimmed:
-            return
-        self.trimmed = True
-        keep_words = []
-        for k, v in self.word2count.items():
-            if v >= min_count:
-                keep_words.append(k)
-
-        self.word2index = {}
-        self.word2count = {}
-        self.index2word = {PAD_token: 'PAD', SOS_token: 'SOS',
-                           EOS_token: 'EOS', UNK_token: 'UNK'}
-        self.num_words = 4
-        for word in keep_words:
-            self.add_word(word)
 
 def han_prediction(sentence, model_path, vocab_path):
 
@@ -98,13 +55,9 @@ def han_prediction(sentence, model_path, vocab_path):
             return s.squeeze(), alpha.squeeze()
 
 
-    # takes string sentence and returns sentence of word indices
-    def indexesFromSentence(voc, sentence):
-        return [voc.word2index[word] for word in sentence.split()] + [EOS_token]
-
-
     def han_(sentence):
-        sentence_tensor = torch.Tensor([reviews.word2index[word] for word in sentence.split()]).long()
+        # slightly hacky way to use the word "a" as a default
+        sentence_tensor = torch.Tensor([reviews.word2index.get(word, 5) for word in sentence.split()]).long()
         sentence_tensor = sentence_tensor.unsqueeze(dim=0)
 
         p, alpha = han(sentence_tensor, [len(sentence.split())])
@@ -112,7 +65,6 @@ def han_prediction(sentence, model_path, vocab_path):
 
 
     reviews = pickle.load(open(vocab_path, 'rb'))
-    print(reviews)
     V = len(reviews.index2word)
 
     han = HAN(hidden_size=40, vocab_size=V, embedding_dim=50)

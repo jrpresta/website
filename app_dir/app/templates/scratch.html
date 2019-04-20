@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html>
-<h1>Exploring Colors!</h1>
+<h1>Movie Review Predictions</h1>
 <body>
 
-<h3>The probability of this review being positive is {{ prob }}</h3>
-<p>
-    {%- for word in words %}
-        <span style="color: rgb({{ 255-255*word[1] }}, {{ 255-255*word[1] }}, 255)">{{ word[0] }}</span>
-    {%- endfor %}
-</p>
+<p>Please enter the text that you would like to review. (Must be at least two words)</p>
+
+<form method="POST">
+    <input name="text">
+    <input type="submit">
+</form>
 
 </body>
 </html>

@@ -1,28 +1,32 @@
 from app import application
 import sys
-from flask import render_template
+from flask import render_template, request
 sys.path.insert(0, '../model/')
 import model
 from .frontend import RGB_calc
 
-@application.route('/index')
+# TODO: Handle Key Errors
+
 @application.route('/')
+def home():
+    return render_template('scratch.html')
+
+
+@application.route('/', methods=['POST'])
 def index():
-    test = 'favorite movie ever'
+    # test = 'if this movie were a sandwich it would be gross'
+    test = request.form['text']
+
     p, alpha = model.han_prediction(test,
                                     '../model/HAN_lower.pt',
                                     '../model/reviews.pkl')
-    colors = [RGB_calc(a) for a in alpha]
 
-    # TODO: Write function provides better RBG values for printing
+    print(alpha)
+    colors = [RGB_calc(a) for a in alpha]
 
     return render_template('index.html',
                            words=zip(test.split(), colors),
                            prob=p)
-
-    # return render_template('scratch.html',
-    #                        words=zip(test.split(), alpha),
-    #                        prob=p)
 
 
 application.run(host='0.0.0.0', port=8080)
