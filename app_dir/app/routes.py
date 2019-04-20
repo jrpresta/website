@@ -15,13 +15,12 @@ def home():
 @application.route('/', methods=['POST'])
 def index():
     # test = 'if this movie were a sandwich it would be gross'
-    test = request.form['text']
+    test = request.form['text'].lower()
 
     p, alpha = model.han_prediction(test,
                                     '../model/HAN_lower.pt',
                                     '../model/reviews.pkl')
 
-    print(alpha)
     colors = [RGB_calc(a) for a in alpha]
 
     return render_template('index.html',
