@@ -5,8 +5,8 @@ sys.path.insert(0, '../model/')
 import model
 from .frontend import RGB_calc
 
-# TODO: Handle Key Errors
 
+# TODO: Handle Key Errors
 @application.route('/')
 def home():
     return render_template('scratch.html')
