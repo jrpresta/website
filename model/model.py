@@ -11,6 +11,9 @@ class Voc(Dataset):
 
 
 def han_prediction(sentence, model_path, vocab_path):
+    """Given a sentence for prediction, the path to the model
+    embeddings and the path to the vocab dictionary, this function
+    will return the probability of positivity and the word importances"""
 
     class HAN(nn.Module):
         def __init__(self, vocab_size, embedding_dim=60,

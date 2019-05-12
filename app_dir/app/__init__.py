@@ -1,6 +1,5 @@
 from flask import Flask
 from config import Config
-# from flask_login import LoginManager
 
 # initialize
 # create an application instance which handles all requests
