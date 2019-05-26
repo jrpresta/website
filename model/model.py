@@ -55,7 +55,8 @@ def han_prediction(sentence, model_path, vocab_path):
 
             # take the linear combination of hidden layers and
             # plug into Linear Layer and Sigmoid to get probability
-            s = self.sigmoid(self.fc3(s))
+            # s = self.sigmoid(self.fc3(s))
+            s = self.fc3(s)
 
             return s.squeeze(), alpha.squeeze()
 
